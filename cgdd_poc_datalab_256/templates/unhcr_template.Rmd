@@ -1,0 +1,503 @@
+---
+# Front cover title and subtitle. Also use in the running header thoughout the document
+title: "Reproducible Analysis"
+subtitle: "PDF Report"
+# Abstract create an introduction box on the cover. Should be concise.
+#If you want want a full page image just remove abstract-title and abstract from the YAML
+abstract-title: First page sub-title
+abstract: "Tur, sequis sunt abor rempos molupiet lab ipsa natque con niminve llesequos derro restes serionet autasperit ut estrum, ut quia excero et vit voloreic torum quae erias earchil explique pe officabo"
+# Date is used in the running footer
+date: "17 December 2020"  
+# Author are the persons creating the doc. They won't appear in the doc but will be part of the DOM.
+# For the contact on the back cover, please refer to the bottom of the Rmd and ammend accordingly.
+author:
+  - name: Contact name1
+    affiliation: Job title1
+    email: <contact1email@unhcr.org>
+  - name: Contact name2
+    affiliation: Job title2
+    email: <contact2email@unhcr.org>
+
+output: 
+  unhcRstyle::unhcr_templ_paged: 
+    # Change to false to remove table of content
+    front_img: 
+    toc: true
+    # Change to true to add number in front of chapters
+    number_sections: false
+    # Change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
+    self_contained: true
+# Set  toc title, default none
+toc-title: Contents
+# Change to false to remove list of tables
+lot: true
+# Set lot title, default: "List of Tables"
+lot-title: "Tables"
+# Change to false to remove list of figures
+lof: true
+# Set lof title, default: "List of Figures"
+lof-title: "Figures"
+# If you include any <abbr> a list of abbreviations will be built.
+# Set lof title, default: "List of Abbreviations"
+loa-title: "Acronyms"
+# Include footnotes direclty in the related page
+paged-footnotes: true
+# Turn links to footnote when printing the PDF on/off
+links-to-footnotes: true
+# uncomment this line to produce HTML and PDF in RStudio:
+#knit: pagedown::chrome_print
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE, message=FALSE, warning=FALSE}
+# Load required packages for charts with UNHCR style 
+library(unhcRstyle)
+library(ggplot2)
+library(tidyverse)
+library(unhcrdatapackage)
+library(scales)
+library(ragg)
+update_geom_font_defaults()
+```
+
+
+# Template
+
+::: {.lead .unhcr-grey}
+This R Markdown document includes all the necessary features and styles to create an UNHCR branded report.
+:::
+
+This specific template is using principally the Pagedown package, for all the information about the package see <https://pagedown.rbind.io/>. The template targets mainly the creation of paginated HTML reports that can be easily printed as PDF, but from one R Markdown document we can have many different outputs (see below).
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Preview paged HTML report
+
+When you compile an R Markdown document to HTML in RStudio, RStudio will display the HTML page through a local web server, so paged.js will work in RStudio Viewer. However, when you view such pages in a real web browser, you will need a separate web server. The easiest way to preview these HTML pages in a web browser may be through the RStudio **servr** package, just type the following code in your R console and head to <http://127.0.0.1:4321/> in your browser to access the files.
+
+```{r servr, include=TRUE, eval=FALSE}
+# Load webserver to preview paged HTML 
+servr::httd()
+```
+
+## Print to PDF
+
+The easiest way to print to PDF is with Google Chrome or Chromium using the menu “Print” or by pressing Ctrl + P (or Command + P on macOS). Remember to allow background graphics to be printed.
+
+There are also 2 other built-in ways:
+
+1. using the function pagedown::chrome_print(). Its first argument (input) accepts a path to a local Rmd or HTML file or an URL. Google Chrome or Chromium must be installed on your system.
+2. in RStudio, adding the following line in the YAML header of your Rmd file:
+
+```{r print, include=TRUE, eval=FALSE}
+knit: pagedown::chrome_print
+```
+
+With this metadata parameter, the behavior of the “Knit” button of RStudio is modified: it produces both the HTML document and the PDF with Chrome. This functionality is suitable for any R Markdown HTML output format and is mainly convenient for small documents like presentations or notes.
+If chrome_print() cannot find Chrome or Chromium automatically, set the PAGEDOWN_CHROME environment variable to the path to Chrome or Chromium executable.
+
+## YAML metadata
+
+
+See <https://pagedown.rbind.io/#miscellaneous-features> for extra information on the YAML variables of the package.
+
+# Typography
+
+::: {.lead .unhcr-grey}
+Documentation and examples for typography, including global settings, headings, body text, lists, and more.
+:::
+
+The template uses **Lato**, one of the brand recommended font paired with **Arial** as a fallback (`font-family: 'Lato', Arial, sans-serif;`). **Lato** has been selected as it can easily be downloaded and added to the report automatically.
+
+For all the coding part we needed a monospace font, so we used **Roboto mono** as it is easily accessible too.
+
+## Inline text element syntax
+
+Styling for common inline elements.
+
+**Example:**
+
+*This line rendered as italicized text.*
+
+**This line rendered as bold text.**
+
+***This line rendered as italicized and bold text.***
+
+~~This line of text will be strikethrough.~~
+
+You can use the `<u>` tag to <u>underline text</u>.
+
+You can use the `<mark>` tag to <mark>highlight text</mark>.
+
+This `^text or number^` rendered as ^superscript^.
+
+```{r inline-text, include=TRUE, eval=FALSE}
+*This line rendered as italicized text.*
+**This line rendered as bold text.**
+***This line rendered as italicized and bold text.***
+~~This line of text will be strikethrough.~~
+# There is no R Markdown code for underline but HTML can be entered directly.
+You can use the '<u>' tag to <u>underline text</u>.
+# There is no R Markdown code for mark but HTML can be entered directly.
+You can use the '<mark>' tag to <mark>highlight text</mark>.
+This '^text or number^' rendered as ^superscript^.
+```
+
+## Headings
+
+All HTML headings, `<h1>` through `<h6>`, are available. To create a heading use `#` sign and include as many as the heading level (see example below).
+
+If the table of content is active tags from `<h1>` to `<h3>` will appear in it with their respective hierarchy.
+
+**Example:**
+
+:::{.unhcr-blue}
+[h1 Heading]{style="font-size: 2.5em;"}
+
+[h2 Heading]{style="font-size: 2em;"}
+:::
+
+[h3 Heading]{style="font-size: 1.75em; font-weight: 700;"}
+
+#### h4 Heading
+
+##### h5 Heading
+
+###### h6 Heading
+
+```{r heading, include=TRUE, eval=FALSE}
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+```
+
+## Lead
+
+To create subheading type of paragraph with bigger font.
+
+**Example:**
+
+::: {.lead}
+Example of a paragraph with the `.lead` class applied
+:::
+
+```{r lead, include=TRUE, eval=FALSE}
+# To apply a specific class to an element use the below R Markdown code
+::: {.lead}
+Example of a paragraph with the `.lead` class applied
+:::
+```
+
+## Quotes
+
+In R Markdown, quotes in a certain part of the text are indicated using a blockquote element. The greater-than sign is used for this purpose (>). The structure showed in the below examples should be maintained for better results. If other format are needed please open an issue.
+
+**Example:**
+
+Complete quotes including source, open and closing quote symbols.
+
+> It is further proof that refugee movements and the broader issue of migration of populations ... is a global challenge that cannot be confined to a few countries.
+>
+> Filippo Grandi
+
+Simple quote with no source nor quote symbols.
+
+> The situation in South Sudan is far too fragile and dangerous for people to go back.
+
+```{r quote, include=TRUE, eval=FALSE}
+# Complete
+> Quote text
+>
+> First and Last name
+
+# Simple
+> Quote text
+```
+
+## Abbreviations
+
+A list of abbreviations is automatically built if the document contains at least one HTML `abbr` element.
+
+For instance, if the R Markdown document contains `<abbr title="United Nations High Commissioner for Refugees">UNHCR</abbr>`, a list of abbreviations is built with the CSS definition.
+
+**Example:**
+
+<abbr title="The United Nations High Commissioner for Refugees">UNHCR</abbr>
+
+```{r abbr, include=TRUE, eval=FALSE}
+# There is no R Markdown code for abbreviations but HTML can be entered directly.
+<abbr title="The United Nations High Commissioner for Refugees">UNHCR</abbr>
+```
+
+## Footnotes
+
+Footnotes are added using the `^[This is a footnote]` R Markdown notation. The number will be automatically generated and the text between brackets will be added at the bottom of the footnote page.
+
+**Example:**
+
+This is a footnote^[Text of the footnote], it can include anything and can also be stylize UNHCR^[The **United Nations** High Commissioner for Refugees <https://www.unhcr.org/>]
+
+```{r footnote, include=TRUE, eval=FALSE}
+This is a footnote^[Text of the footnote]
+UNHCR^[The **United Nations** High Commissioner for Refugees <https://www.unhcr.org/>]
+```
+
+## Lists
+
+##### Unordered
+
+To create an unsorted list in Markdown, you can use either the **plus sign, the hyphen or an asterisk**. All three ways produce the same result. To create sub-level list simply use **4 spaces indentation**.
+
+**Example:**
+
+* item 1
+* item 2
+    + sub-item 2.1
+    + sub-item 2.2
+* item 3
+    + sub-item 3.1
+    + sub-item 3.2
+
+```{r unordered-list, include=TRUE, eval=FALSE}
+* item 1
+* item 2
+    + sub-item 2.1
+    + sub-item 2.2
+* item 3
+    + sub-item 3.1
+    + sub-item 3.2
+```
+
+##### Ordered
+
+A sorted list is generated by a **number directly followed by a period**. To create sub-level list simply use **4 spaces indentation**.
+
+**Example:**
+
+1. item 1
+2. item 2
+    1. item 2.1
+    2. item 2.2
+3. item 3
+    1. item 3.1
+    2. item 3.2
+
+```{r ordered-list, include=TRUE, eval=FALSE}
+1. item 1
+2. item 2
+    1. item 2.1
+    2. item 2.2
+3. item 3
+    1. item 3.1
+    2. item 3.2
+```
+
+##### Mixed
+
+A mixed list is generated by using both the unordered and ordered symbols. To create sub-level list simply use **4 spaces indentation**.
+
+**Example:**
+
+1. item 1
+* item 2
+    1. item 2.1
+    2. item 2.2
+3. item 3
+    * item 3.1
+    * item 3.2
+
+```{r mixed-list, include=TRUE, eval=FALSE}
+1. item 1
+* item 2
+    1. item 2.1
+    2. item 2.2
+3. item 3
+    * item 3.1
+    * item 3.2
+```
+
+
+# Helper class
+
+::: {.lead .unhcr-grey}
+**A serie of CSS `.class`** to give extra flexibility to the report layout, as well as simplifying recurrent styling need.
+:::
+
+A class can be easily applied to a block of content, using the [fenced `div`s approach](https://pandoc.org/MANUAL.html#extension-fenced_divs). For more granular need you can also apply a class directly to inline content with [bracketed `span`s](https://pandoc.org/MANUAL.html#extension-bracketed_spans).
+
+**Example:**
+
+:::{.unhcr-blue}
+A ut perore, ut lam simodi sinvel magnis doluptatem que est.
+:::
+
+A ut perore, ut lam simodi sinvel [magnis doluptatem]{.unhcr-blue} que est.
+
+```{r helper, include=TRUE, eval=FALSE}
+# Fenced divs
+:::{.unhcr-blue}
+A ut perore, ut lam simodi sinvel magnis doluptatem que est.
+:::
+
+# Bracketed spans
+A ut perore, ut lam simodi sinvel [magnis doluptatem]{.unhcr-blue} que est.
+```
+
+## Text color
+
+Simply add the `.unhcr-blue` or `.unhcr-grey` classes to apply UNHCR branded colors to text element. As mentioned before this can be applied both to fenced divs and inline elements.
+
+**Example:**
+
+This will be colored [blue]{.unhcr-blue} and this will be [grey]{.unhcr-grey}. It can even be mixed with other inline styling like **[bold]{.unhcr-blue}**.
+
+```{r text-color, include=TRUE, eval=FALSE}
+This will be colored [blue]{.unhcr-blue} and this will be [grey]{.unhcr-grey}.
+It can even be mixed with other inline styling like **[bold]{.unhcr-blue}**.
+```
+
+:::{.page-break}
+:::
+
+## Background color
+
+Easily create call out boxes by adding the backgroud helper classes. They come in light-blue (`.bg-blue`) and light-grey (`.bg-grey`). Both come with padding to allow spacing around the elements inside. These classes need to be apply **only to fenced divs element**.
+
+**Example:**
+
+:::{.bg-blue}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ultrices mauris eget ligula imperdiet tincidunt. Proin eget odio laoreet, sagittis metus a, rutrum risus. Duis in ante sed enim pharetra pulvinar. Phasellus sit amet vestibulum lorem. Aliquam tincidunt mauris sit amet pharetra viverra.
+:::
+
+<br>
+
+:::{.bg-grey}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ultrices mauris eget ligula imperdiet tincidunt. Proin eget odio laoreet, sagittis metus a, rutrum risus. Duis in ante sed enim pharetra pulvinar. Phasellus sit amet vestibulum lorem. Aliquam tincidunt mauris sit amet pharetra viverra.
+:::
+
+```{r bg-color, include=TRUE, eval=FALSE}
+# Blue example
+:::{.bg-blue}
+Lorem ipsum dolor sit amet,...
+:::
+  
+# Grey example
+:::{.bg-grey}
+Lorem ipsum dolor sit amet,...
+:::
+```
+
+## Columns
+
+The **`.col2`** class create a 2 columns layout for the content inside the section comprise between the opening `:::{.col2}` and closing `:::` tags. The use is recommended **only for text**. For more complex layout including images or plots please refer to the [Floats](#floats) section for documentation or to the [Helper classes and images](#helper-classes-and-images) part for examples.
+
+**Example:**
+
+:::{.col2}
+A ut perore, ut lam simodi sinvel magnis doluptatem que est, tem quosantis is cone ea dolessus anditas pereper sperum que sim assundebis eum fuga. Et eate litia seruntotas ideni untorro mollatis recest anisqui ilicab ipsanitio.
+:::
+
+```{r columns, include=TRUE, eval=FALSE}
+:::{.col2}
+A ut perore, ut lam simodi sinvel magnis doluptatem que est, tem quosantis is cone ea
+dolessus anditas pereper sperum que sim assundebis eum fuga. Et eate litia seruntotas
+ideni untorro mollatis recest anisqui ilicab ipsanitio.
+:::
+```
+
+## Floats
+
+These utility classes float an element to the left or right using the CSS float property. `!important` is included to avoid specificity issues.
+
+We highly encourage you to use the `.clearfix` class to quickly and easily clear floated content within a container by adding a clearfix utility. Apply `.clearfix` to the **parent element** this will ensure the content flow is back to normal after the floating elements, see [Helper classes and images](#helper-classes-and-images) for examples.
+
+**Example:**
+
+:::{.clearfix}
+:::{.float-start}
+This will float start (left of the page).
+:::
+
+<br>
+
+:::{.float-end}
+This will float end (right of the page).
+:::
+:::
+
+```{r floats, include=TRUE, eval=FALSE}
+# Clearfix is needed to make sure it recreates the normal content flow
+:::{.clearfix}
+:::{.float-start}
+This will float start (left of the page).
+:::
+:::
+  
+:::{.clearfix} 
+:::{.float-end}
+This will float end (right of the page).
+:::
+:::
+```
+
+:::{.page-break}
+:::
+
+## Page break
+
+The template automatically creates a page break when your content doesn't fit into a page. However, you may need to control this fragmentation to avoid solitary element. Simply create a fenced div with the class `.page-break` and it will push all the following content to the next page. Avoid using the `.page-break` class alongside floating element.
+
+**Example:**
+
+```{r page-break, include=TRUE, eval=FALSE}
+# Create an empty div thet will push all following content to the next page.
+:::{.page-break}
+:::
+```
+
+::: {.back-cover}
+
+::: {.back-header}
+<h1 class="back-title"></h1>
+<h1 class="back-subtitle"></h1>
+:::
+
+::: {.back-footer}
+For more information please contact:
+
+::: {.back-contact}
+[Contact1 Name]{.back-name}
+
+Contact1 Title
+
+[email1@unhcr.org](mailto:email1@unhcr.org)
+:::
+
+::: {.back-contact}
+[Contact2 Name]{.back-name}
+
+Contact2 Title
+
+[email2@unhcr.org](mailto:email2@unhcr.org)
+:::
+
+:::
+
+:::
+
+
+

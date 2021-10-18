@@ -1,0 +1,30 @@
+
+/* title */
+  h1.title {
+    text-align: left;
+    font-size: 30px;
+  }
+
+h1.subtitle {
+  text-align: left;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+
+/* date */
+  .date {
+    text-align: left;
+    color: #6c8da9;
+  }
+
+/* interligne */
+  h3 {
+    text-transform: uppercase;
+    color: #6c8da9;;
+  }
+
+.shorttitle {
+  position: running(runningTitle);
+}
+
