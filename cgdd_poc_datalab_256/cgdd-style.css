@@ -21,7 +21,8 @@ h1.subtitle {
 /* interligne */
   h3 {
     text-transform: uppercase;
-    color: #6c8da9;;
+    color: #6c8da9;
+    word-break: break-all ;
   }
 
 .shorttitle {

@@ -7,7 +7,7 @@ subtitle: "La dépense nationale de protection de la biodiversité et des paysag
 shorttitle: "**Quelles réponses économiques face au déclin de la biodiversité ?**<br>La dépense nationale de protection de la biodiversité et des paysages"
 abstract: |
   The abstract of the article.
-# at least one keyword must be supplied
+# at least one keyword must be supplied 
 keywords: [keywords, not capitalized, "[Java]{.proglang}"]
 links-to-footnotes: true
 paged-footnotes: true
@@ -17,12 +17,15 @@ output:
     css:
       - jss-fonts
       - jss-page
-#      - jss
+      # - jss
       - cgdd-page.css
       - cgdd-style.css
+    template:
+      - cgdd-paged.html
     self_contained: false
 # uncomment this line to produce HTML and PDF in RStudio:
 # knit: pagedown::chrome_print
+
 ---
 
 
@@ -36,8 +39,6 @@ library(here)
 
 ```
 
-
-.date[Septembre 2021]
 
 En 2018, 2,4 milliards d’euros ont été consacrés à la protection de la biodiversité et des paysages sur le territoire national. Cette dépense se répartit, à parts sensiblement égales, entre le développement des aires protégées, la réduction des pressions sur les milieux naturels, la protection du patrimoine naturel et la réhabilitation des milieux aquatiques. Les collectivités locales sont les premiers financeurs de la protection de la biodiversité en France.
 

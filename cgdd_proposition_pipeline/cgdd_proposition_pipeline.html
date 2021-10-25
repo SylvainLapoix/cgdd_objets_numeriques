@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>CGDD Objets numériques</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Sylvain Lapoix, Datactivist" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/datactivist.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/datactivist-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="cgdd_pipeline.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# CGDD<br>Objets numériques
+### Sylvain Lapoix, Datactivist
+### 27/10/2021
+
+---
+
+layout: true
+  
+
+&lt;div class='my-footer'&gt;&lt;span&gt;CGDD - objets numériques -&lt;/span&gt; &lt;center&gt;&lt;div class=logo&gt;&lt;img src='https://github.com/datactivist/slides_datactivist/raw/master/inst/rmarkdown/templates/xaringan/resources/img/fond_noir_monochrome.png' width='0px'&gt;&lt;/center&gt;&lt;/span&gt;&lt;/div&gt; 
+
+
+&lt;style type="text/css"&gt;
+
+
+
+&lt;/style&gt;
+
+
+---
+
+class: inverse, center, middle
+
+
+
+---
+
+class: inverse, center, middle
+
+# I. Preuve de concept
+
+---
+
+### Objet à reproduire
+
+.center[
+![](./img/datalab_essentiel_256.png)
+]
+
+---
+
+### Méthodologie
+
+.pull-left[**Analyse de la structure**
+
+Nous avons tout d'abord étudié la structure de la publication pour isoler deux informations :
+
+1. les données clefs mise en page de manière spécifique (titre, sous-titre, date, auteur, etc.) ;
+2. les marqueurs de style et de mise en page (format de titre, colonnes, intertitres, encadrés, etc.).
+
+![](./img/datalab_structure.png)
+]
+
+.pull-right[**Mise à plat des éléments textuels**
+
+Nous appuyant sur le document source du PDF, nous avons *mise à plat* le texte pour en isoler les éléments de manière cohérente :
+
+* titraille ;
+* texte principal ;
+* encadré.
+
+Nous préparons ainsi le **document source** qui servira de matériau de base à notre pipeline.
+
+]
+
+---
+
+### Boîte à outils : R, Rmarkdown, `{pagedown}`
+
+Notre démarche s'appuie sur un ensemble de solutions techniques complémentaires :
+1. `R` : langage de programmation orienté objet d'usage courant, il bénéficie d'une très grande versatilité grâce à une communauté riche et aux compétences variées. Ce langage dispose notamment de librairies riches et puissantes en traitement et visualisation de données ;
+2. `R Markdown` : déclinaison du langage de mise en forme markdown, le Rmarkdown permet une mise en page discrète du texte et l'usage de nombreux outils de production de format textuel ;
+3. `{pagedown}` : librairie bâtie sur R Markdown permettant la production de documents imprimables totalement paramétrables grâce à des technologies issues du web.
+
+---
+
+### Visualisation
+
+Suivant la proposition du client, nous avons reproduit la figure 1 avec la librairie R `{ggplot}`.
+
+.pull-left[
+
+![](./img/datalab_256_figure1.png)
+]
+
+.pull-right[
+![](cgdd_proposition_pipeline_files/figure-html/figure1-1.png)&lt;!-- --&gt;
+
+]
+
+Nous avons pu reproduire la plupart des spécificités du graph à l'aide de ses fonctions ainsi que d'autres librairies développées par la communauté :
+
+* mise forme des textes et légendes (`{ggtext}`) ;
+* adaptation des légendes et échelles (`{lemon}`) ;
+* annotation des données (`{ggforce}`) ;
+* etc.
+
+---
+
+### Production du document
+
+.pull-left[**En entrée**
+Le package `{pagedown}` permet de produire un document personnalisé grâce à plusieurs types de fichier :
+
+1. un fichier textuel contenant les éléments rédactionnels ;
+2. un ou plusieurs fichiers R pour produire la ou les dataviz ;
+3. des fichiers images pour les illustrations et logos ;
+4. des fichiers de style pour spécifier la mise en forme ;
+5. un fichier de structure pour spécifier la mise en page.
+]
+
+.pull-right[**En sortie**
+`{pageodown}` produit en sortie deux fichiers au contenu similaire mais de format différent :
+
+1. **un document texte partageable au format PDF** paginé, numéroté et imprimable au format brochure ;
+2. **un fichier HTML** permettant la publication direct sous forme de page web.
+
+Les deux documents sont générés simultanément à l'exécution de pagedown.
+
+]
+
+
+---
+
+### Résultat
+
+---
+
+class: inverse, center, middle
+
+# II. Sources d'inspiration
+
+---
+
+### S'approprier {pagedown} (RR2020)
+
+---
+
+### Créer son style et l'appliquer (UNHCR)
+
+---
+
+### Automatiser la publication (RPLSS)
+
+
+---
+
+### Créer son propre package (ThinkR)
+
+---
+
+
+class: inverse, center, middle
+
+
+# III. Un pipeline de publication
+
+---
+
+## Organisation générale
+
+---
+
+
+---
+
+### Production textuelle
+
+spécificité Rmd
+chemin de la copie
+/
+Bénéfices
+lisibilité
+faible montée en compétence requise
+circuit de la copie amont
+
+---
+
+### Production visuelle
+
+fichiers acceptés
+
+fichiers à produire
+compétences disponibles (questionnaire)
+/
+Bénéfices
+possibilité d'automatisation
+stabilité du style
+possibilité de templatisation
+possibilité de packagisation
+
+---
+
+### Maquette
+
+contraintes techniques (HTML/CSS)
+compétences disponibles (questionnaire)
+/
+Bénéfices
+rapidité d'exécution
+modularité
+adaptabilité
+
+---
+
+### Création des styles
+
+contraintes techniques (CSS/JS)
+ressources
+organisation
+compétences disponibles (questionnaire)
+/
+Bénéfices
+stabilité
+cohérence visuelle
+automatisme
+versatilité
+
+
+---
+
+class: inverse, center, middle
+
+# Merci !
+
+Contact : [sylvain@datactivist.coop](mailto:sylvain@datactivist.coop)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

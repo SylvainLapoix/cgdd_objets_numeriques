@@ -1,11 +1,8 @@
- 282 lines (271 sloc) 4.94 KB
 :root {
   --background: #2888b8;
   --pagedjs-width: 210mm;
   --color-paper: white;
   --screen-pages-spacing: 5mm;
-  --header-width: 462px;
-  --header-image-padding: 18px;
 }
 
 
@@ -22,43 +19,9 @@
 
 /* article header */
 .document-header {
-  border-width: 4px 0;
-  border-style: solid;
-  width: var(--header-width);
-  position: relative;
-  margin-left: auto;
-  margin-bottom: 110px;
-}
-.document-header::before {
-  content: "";
-  display: block;
-  position: absolute;
-  left: calc(var(--header-width) - var(--pagedjs-width) + var(--pagedjs-margin-left) + var(--pagedjs-margin-right));
-  border-width: 4px 0;
-  border-style: solid;
-  border-color: transparent;
-  top: -4px;
-  height: 100%;
-  width: calc(var(--pagedjs-width) - var(--pagedjs-margin-left) - var(--pagedjs-margin-right) - var(--header-width) - var(--header-image-padding));
-  background-clip: border-box;
-  background-image: url(;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-origin: border-box;
-}
-.journal-name {
-  padding-top: 14px;
-  padding-left: 20px;
-  filter: invert(100%);
-  height: 50px;
-}
-.header-meta {
-  font-style: italic;
-  margin: 6px 0;
-  font-size: 14px;
-}
-.header-meta .doi {
-  float: right;
+    width:100%;
+    height:100%;
+    background: url(https://raw.githubusercontent.com/SylvainLapoix/cgdd_objets_numeriques/main/cgdd_poc_datalab_256/logo/header_datalab.png);
 }
 
 p {

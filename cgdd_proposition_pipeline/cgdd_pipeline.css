@@ -1,0 +1,78 @@
+
+.yellow-h{
+  background: #ffff88;
+}
+
+.blue-h{
+  background: #83c7fc;
+}
+
+.media-type {
+  background-color: #ffffff ;
+    padding: 3px ;
+  font-family: 'Rokkitt';
+  color: #ff0000;
+}
+
+.outil {
+  background-color: #359D73 ;
+    padding: 3px ;
+  font-family: 'Rokkitt';
+  font-style: bold;
+  color: #ffffff ;
+}
+
+.pull-right-white {
+  background-color: #ffffff ;
+    padding: 2px ;
+  width: 45%;
+  float: right;
+}
+
+
+.caption {
+  text-align: right;
+  font-size: .8rem;
+}
+
+.redred {
+  color: #ff0000;
+}
+
+.green {
+  color: #41990e;
+}
+
+.orange {
+  color: #ffa500;
+    
+}
+
+.quote {
+  font-family: 'Rokkitt';
+  font-style: italic;
+  font-size: 18px;
+}
+
+
+.pull-left-wide {
+  width: 65%;
+  float: left;
+}
+
+.pull-right-wide {
+  width: 65%;
+  float: right;
+}
+
+.pull-right-narrow {
+  width: 30%;
+  float: right;
+}
+
+.pull-left-narrow {
+  width: 30%;
+  float: left;
+}
+
+
