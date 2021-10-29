@@ -1,7 +1,7 @@
 ---
 author:
   - name: Elodie RICAUD
-    affiliation: SDES
+  - affiliation: SDES
 title: "Quelles réponses économiques face au déclin de la biodiversité ?"
 subtitle: "La dépense nationale de protection de la biodiversité et des paysages"
 shorttitle: "**Quelles réponses économiques face au déclin de la biodiversité ?**<br>La dépense nationale de protection de la biodiversité et des paysages"

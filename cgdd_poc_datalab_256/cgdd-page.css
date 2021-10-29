@@ -17,13 +17,6 @@
   }
 }
 
-/* article header */
-.document-header {
-    width:100%;
-    height:100%;
-    background: url(https://raw.githubusercontent.com/SylvainLapoix/cgdd_objets_numeriques/main/cgdd_poc_datalab_256/logo/header_datalab.png);
-}
-
 p {
   widows: 3;
   orphans: 3;
